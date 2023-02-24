@@ -1,0 +1,3 @@
+aluno+2aluna=8
+2aluno+aluna=7
+-3aluno-aluna
