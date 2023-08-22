@@ -1,0 +1,14 @@
+import tkinter as tk
+import numpy as np
+import math
+
+
+root = tk.Tk()
+
+root.title("teste")
+
+ladoEsquerdo = tk.Frame(root,width=400, height=600, bg="lightgray")
+ladoDireito =  tk.Frame(root, width=400, height=600, bg="white")
+ladoEsquerdo.pack(side="left")
+ladoDireito.pack(side="right")
+root.mainloop()
