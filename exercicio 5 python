@@ -1,0 +1,25 @@
+import random
+import threading
+import time
+
+class Teste:
+    contador = 0
+        
+    def run(self):
+        
+        stop = random.randrange(0,5)
+        print("thread indo dormir")
+        time.sleep(stop)
+        print("thread encerrando")
+        self.contador -=1
+
+    def criaThread(self):
+        if self.contador<10:
+            
+            t = threading.Thread(target=self.run)
+            t.start()
+            self.contador+=1
+teste = Teste()
+while True:
+    
+    teste.criaThread()
