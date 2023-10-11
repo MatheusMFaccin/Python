@@ -1,25 +1,39 @@
 import socket
-HOST = 'localhost'    # The remote host
-PORT = 8080              # The same port as used by the server
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    msg = s.recv(1024)
-    print(msg)
-    valor1 =  float(input("digite o valor 1"))
-    valor2 =  float(input("digite o valor 2"))
-    enviar = str(valor1)+":"+str(valor2)
-    s.send(enviar.encode())
+import threading
+import queue
 
-    msg2 = s.recv(1024)
+server_host = '127.0.0.1'  
+server_port = 12345
 
-    print(msg2)
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+message_queue = queue.Queue()
+
+
+def recebendoMenssagem():
+    client_socket.sendto(b"", (server_host, server_port))
+    while True:
+        data = client_socket.recv(1024)
+        mensagem = data.decode('utf-8')
+        print(f"Recebido: ",mensagem)
+
+
+def enviandoMenssagendo():
+    while True:
+        message = input("Digite uma mensagem para enviar ao servidor: ")
+        message_queue.put(message)
+        client_socket.sendto(message.encode('utf-8'), (server_host, server_port))
+        
+
+
+
+thread = threading.Thread(target=recebendoMenssagem)
+thread2 = threading.Thread(target=enviandoMenssagendo)
+
+thread2.start()
+thread.start()
+
+
+
+
     
-    op = input("")
-
-    s.send(op.encode())
-
-    msg3 = s.recv(1024)
-
-    print(msg3)
-    s.close
-
