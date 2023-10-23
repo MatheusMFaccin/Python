@@ -1,0 +1,18 @@
+import pymeshlab
+
+def converteXYZ(arquivoXyz, arquivoObj):
+    ms = pymeshlab.MeshSet()
+    
+    # Importa o arquivo XYZ
+    ms.load_new_mesh(arquivoXyz)
+    
+    # Exporta o arquivo FBX
+    ms.save_current_mesh(arquivoObj)
+    
+    
+
+
+arquivoXyz = "teste.xyz"  
+arquivoObj = "seuarquivo.OBJ"  
+    
+converteXYZ(arquivoXyz, arquivoObj)
