@@ -19,14 +19,14 @@ class Cromossomo:
             
         
         return nota;    
-    def compareTo(self,other):
+    def __gt__ (self,other):
         if (self.aptidao > other.aptidao):
             return -1
         elif(self.aptidao == other.aptidao):
             return 0
         
         return 1
-    def equals(self, other) :
+    def __eq__(self, other) :
         if isinstance(other , Cromossomo):
             
             return self.valor == other.valor
@@ -112,7 +112,7 @@ class AG:
             torneio.append(c1)
             torneio.append(c2)
             torneio.append(c3)
-            ordenar(torneio)
+            torneio.sort()
 
             selecionado = torneio.get(0);
 
