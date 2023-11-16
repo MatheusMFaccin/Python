@@ -11,10 +11,10 @@ class Cromossomo:
     def calcular_Aptidao(self, estado_final):
         nota = 0
         i = 0
-        for i  in range(len(str(estado_final))-1):
-            if str(self.valor) in estado_final[i]:
+        for i  in range(len(estado_final)):
+            if str(self.valor[i]) in estado_final:
                 nota += 5
-            print("self.valor: ",self.valor, "i: ", i)
+            
             if str(self.valor[i]) == estado_final[i]:
                 nota += 50
             
@@ -67,7 +67,7 @@ class AG:
         
             
         while (distancia > 1 or houveTroca):
-            distancia = (int) (distancia / 1.3)
+            distancia = int(distancia / 1.3)
             if (distancia <= 0):
                 distancia = 1
             
@@ -214,7 +214,7 @@ class AG:
             novaPopulacao.append(Cromossomo(sFilho2, estadoFinal))
             i = i + 2
 
-            if i >= qtdReproduzidos:
+            if i > qtdReproduzidos:
                 break
         
         
@@ -230,10 +230,10 @@ class AG:
     
     def mutar(populacao, estadoFinal):
         
-        qtdMutantes = random.randrange(int(len(populacao) / 5))
+        qtdMutantes = random.randrange(int(len(populacao) / 4))
         
-
-        while qtdMutantes > 0: 
+        i = 0
+        for i in range(qtdMutantes): 
             posicaoMutante = random.randrange(len(populacao))
             mutante = populacao[posicaoMutante]
             print("vai mutar ", mutante.valor , "  " , mutante.aptidao)
@@ -241,10 +241,10 @@ class AG:
             valorMutado = str(mutante.valor)
             caracterMutante = mutante.valor[random.randrange(len(mutante.valor))]
             caracterSorteado = Util.letras[random.randrange(len(Util.letras))]
-            valorMutado = valorMutado.replace(caracterMutante, caracterSorteado);          
+            valorMutado = valorMutado.replace(caracterMutante, caracterSorteado)          
             mutante = Cromossomo(valorMutado, estadoFinal)
             populacao[posicaoMutante] = mutante
-            qtdMutantes -= 1
+            
 
 
 
@@ -266,7 +266,7 @@ def main():
     print("Geracao 1")
     AG.exibir(populacao)
 
-    i = 1
+    
     for i in range(qtdGeracoes):
         
         AG.selecionarPorTorneio(populacao, novaPopulacao, taxaSelecao)
@@ -287,5 +287,4 @@ def main():
         
         AG.exibir(populacao)
 main()
-
 
